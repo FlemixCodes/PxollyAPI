@@ -18,5 +18,8 @@ class UtilsCategory(BaseMethodCategory):
         response = await self.api.method("utils.getServerTime", params)
 
         if extended:
-            return UtilsGetServerTimeResponse(response=UtilsGetServerTimeExtended(**response["response"]), raw_response=response)
-        return UtilsGetServerTimeResponse(response=response["response"], raw_response=response)
+            response_ = UtilsGetServerTimeExtended(**response["response"])
+        else:
+            response_ = response["response"]
+        
+        return UtilsGetServerTimeResponse(response=response_, raw_response=response)
