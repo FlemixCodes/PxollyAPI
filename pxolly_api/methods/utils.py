@@ -10,6 +10,7 @@ class UtilsCategory(BaseMethodCategory):
     async def get_server_time(self, extended: bool = False) -> UtilsGetServerTimeResponse:
         """
         Получить время сервера Pxolly
+        Документация: https://vk.com/app7273656#/dev/method/utils.getServerTime
 
         :param extended: Подробный ответ
         """

@@ -15,6 +15,7 @@ class UsersCategory(BaseMethodCategory):
     async def get_registered_date(self, user_ids: list[int]) -> GetUserRegisterdDateResponse:
         """
         Получить дату регистрации пользователей
+        Документация: https://vk.com/app7273656#/dev/method/users.getRegisteredDate
 
         :param user_ids: ID пользователей
         """
@@ -22,9 +23,10 @@ class UsersCategory(BaseMethodCategory):
         response = await self.api.method("users.getRegisteredDate", params)
         return GetUserRegisterdDateResponse(response=[GetUserRegisterdDate(**user) for user in response["response"]])
 
-    async def get_user_sticker_packs(self, user_id: int, max_count: int, need_titles: bool = False) -> GetUserStickerPacksResponse:
+    async def get_sticker_packs(self, user_id: int, max_count: int, need_titles: bool = False) -> GetUserStickerPacksResponse:
         """
         Получить список стикер паков пользователя
+        Документация: https://vk.com/app7273656#/dev/method/users.getStickerPacks
 
         :param user_id: ID пользователя
         :param max_count: Максимальное количество паков
