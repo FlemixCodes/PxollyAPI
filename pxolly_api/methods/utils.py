@@ -3,9 +3,7 @@ from pxolly_api.models import UtilsGetServerTimeExtended, UtilsGetServerTimeResp
 
 
 class UtilsCategory(BaseMethodCategory):
-    """
-    Методы для работы с утилитами
-    """
+    """Методы для работы с утилитами"""
 
     async def get_server_time(self, extended: bool = False) -> UtilsGetServerTimeResponse:
         """
