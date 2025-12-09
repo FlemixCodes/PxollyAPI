@@ -1,0 +1,150 @@
+from pxolly_api.methods import BaseMethodCategory
+from pxolly_api.models import (
+    ChatBanMemberResponse,
+    ChatEditTitleResponse,
+    ChatGetByID,
+    ChatGetByIDResponse,
+    ChatGetMembersResponse,
+    ChatMember,
+    ChatGetRolesResponse,
+    ChatRole,
+    ChatGetRulesResponse,
+    ChatGetRules,
+    ChatFormattingEntity,
+    ChatSendMessageResponse,
+    ChatSetMemberRoleResponse,
+    ChatSetSilenceModeResponse,
+)
+
+from pxolly_api.enums import ChatMemberFilter
+
+
+class ChatsCategory(BaseMethodCategory):
+    """Методы для работы с чатами"""
+
+    async def ban_member(self, chat_id: str, member_id: int, date: int, reason: str) -> ChatBanMemberResponse:
+        """
+        Выдать бан участнику в чате
+        Документация: https://vk.com/app7273656#/dev/method/chats.banMember
+
+        :param chat_id: ID чата
+        :param member_id: ID участника
+        :param date: Время бана в unixtime
+        :param reason: Причина
+        """
+        params = {"chat_id": chat_id, "member_id": member_id, "date": date, "reason": reason}
+        response = await self.api.method("chats.banMember", params)
+        return ChatBanMemberResponse(response=response["response"], raw_response=response)
+
+    async def edit_title(self, chat_id: str, title: str) -> ChatEditTitleResponse:
+        """
+        Изменить название чата
+        Документация: https://vk.com/app7273656#/dev/method/chats.editTitle
+
+        :param chat_id: ID чата
+        :param title: Новое название
+        """
+        params = {"chat_id": chat_id, "title": title}
+        response = await self.api.method("chats.editTitle", params)
+        return ChatEditTitleResponse(response=response["response"], raw_response=response)
+
+    async def get_by_id(self, chat_id: str, fields: str) -> ChatGetByIDResponse:
+        """
+        Получить информацию о чате и участниках
+        Документация: https://vk.com/app7273656#/dev/method/chats.getById
+
+        :param chat_id: ID чата
+        :param fields: Дополнительные поля с информацией
+        """
+        params = {"chat_id": chat_id, "fields": fields}
+        response = await self.api.method("chats.getById", params)
+        return ChatGetByIDResponse(response=ChatGetByID(**response["response"]), raw_response=response)
+
+    async def get_members(self, chat_id: str, count: int, offset: int, filter: ChatMemberFilter) -> ChatGetMembersResponse:
+        """
+        Получить участников чата
+        Документация: https://vk.com/app7273656#/dev/method/chats.getMembers
+
+        :param chat_id: ID чата
+        :param count: Количество участников
+        :param offset: Смещение
+        :param filter: Фильтр участников
+        """
+        params = {"chat_id": chat_id, "count": count, "offset": offset, "filter": filter}
+        response = await self.api.method("chats.getMembers", params)
+        return ChatGetMembersResponse(response=[ChatMember(**member) for member in response["response"]], raw_response=response)
+
+    async def get_members_by_id(self, chat_id: str, user_ids: list[str]) -> ChatGetMembersResponse:
+        """
+        Получить участников чата по их ID
+        Документация: https://vk.com/app7273656#/dev/method/chats.getMembersById
+
+        :param chat_id: ID чата
+        :param user_ids: ID участников
+        """
+        params = {"chat_id": chat_id, "user_ids": user_ids}
+        response = await self.api.method("chats.getMembersById", params)
+        return ChatGetMembersResponse(response=[ChatMember(**member) for member in response["response"]], raw_response=response)
+
+    async def get_roles(self, chat_id: str) -> ChatGetRolesResponse:
+        """
+        Получить список ролей чата с их приоритетами
+        Документация: https://vk.com/app7273656#/dev/method/chats.getRoles
+
+        :param chat_id: ID чата
+        """
+        params = {"chat_id": chat_id}
+        response = await self.api.method("chats.getRoles", params)
+        return ChatGetRolesResponse(response=[ChatRole(**role) for role in response["response"]], raw_response=response)
+
+    async def get_rules(self, chat_id: str) -> ChatGetRulesResponse:
+        """
+        Получить правила чата
+        Документация: https://vk.com/app7273656#/dev/method/chats.getRules
+
+        :param chat_id: ID чата
+        """
+        params = {"chat_id": chat_id}
+        response = await self.api.method("chats.getRules", params)
+
+        entities = [ChatFormattingEntity(**entity) for entity in response["response"]["entities"]]
+        model_response = ChatGetRules(text=response["response"]["text"], entities=entities, owner_id=response["response"]["owner_id"])
+        return ChatGetRulesResponse(response=model_response, raw_response=response)
+
+    async def send_message(self, chat_id: str, text: str, random_id: int) -> ChatSendMessageResponse:
+        """
+        Отправить сообщение в чат
+        Документация: https://vk.com/app7273656#/dev/method/chats.sendMessage
+
+        :param chat_id: ID чата
+        :param text: Текст сообщения
+        :param random_id: уникальный идентификатор сообщения
+        """
+        params = {"chat_id": chat_id, "text": text, "random_id": random_id}
+        response = await self.api.method("chats.sendMessage", params)
+        return ChatSendMessageResponse(response=response["response"], raw_response=response)
+
+    async def set_member_role(self, chat_id: str, member_id: int, role_id: int) -> ChatSetMemberRoleResponse:
+        """
+        Изменить роль участника в чате
+        Документация: https://vk.com/app7273656#/dev/method/chats.setMemberRole
+
+        :param chat_id: ID чата
+        :param member_id: ID участника
+        :param role_id: приоритет роли
+        """
+        params = {"chat_id": chat_id, "member_id": member_id, "role_id": role_id}
+        response = await self.api.method("chats.setMemberRole", params)
+        return ChatSetMemberRoleResponse(response=response["response"], raw_response=response)
+
+    async def set_silence_mode(self, chat_id: str, time: int) -> ChatSetSilenceModeResponse:
+        """
+        Установить режим тишины в чате
+        Документация: https://vk.com/app7273656#/dev/method/chats.setSilenceMode
+
+        :param chat_id: ID чата
+        :param time: Время (-1 включить сообщения, 0 - отключить сообщения, >60 - отключить временно)
+        """
+        params = {"chat_id": chat_id, "time": time}
+        response = await self.api.method("chats.setSilenceMode", params)
+        return ChatSetSilenceModeResponse(response=response["response"], raw_response=response)
