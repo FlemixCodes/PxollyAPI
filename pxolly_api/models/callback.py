@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from ._base import BaseResponse
+from pxolly_api.models import BaseResponse
 
 
 class CallbackGetSettingsResponse(BaseResponse):

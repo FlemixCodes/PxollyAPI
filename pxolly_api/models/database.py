@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from ._base import BaseResponse
+from pxolly_api.models import BaseResponse
 
 
 class DatabaseGetResponse(BaseResponse):
@@ -10,7 +10,7 @@ class DatabaseGetResponse(BaseResponse):
 class DatabaseGetIris(BaseModel):
     user_id: int
     last_banned: int
-    spam_count: int
-    text: str
-    is_fake: int
-    comment: str
+    spam_count: int | None
+    text: str | None
+    is_fake: int | None
+    comment: str | None

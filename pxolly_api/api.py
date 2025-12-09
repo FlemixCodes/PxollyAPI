@@ -1,7 +1,7 @@
 import niquests
 from niquests import AsyncSession
 
-from pxolly_api.methods import AccountCategory, CallbackCategory, ChatsCategory, DatabaseCategory
+from pxolly_api.methods import AccountCategory, CallbackCategory, ChatsCategory, DatabaseCategory, UsersCategory, UtilsCategory
 from pxolly_api.exceptions import ResponseError, ApiError, RequestError
 
 
@@ -28,6 +28,8 @@ class PxollyAPI:
         self.callback = CallbackCategory(self)
         self.chats = ChatsCategory(self)
         self.database = DatabaseCategory(self)
+        self.users = UsersCategory(self)
+        self.utils = UtilsCategory(self)
 
     async def method(self, method: str, params: dict | None = None) -> dict:
         """

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from ._base import BaseResponse
+from pxolly_api.models import BaseResponse
 from pxolly_api.enums import FormattingEntityType, ChatMemberStatus
 
 
@@ -19,15 +19,15 @@ class ChatGetByIDResponse(BaseResponse):
 class ChatGetByID(BaseModel):
     id: str
     title: str
-    photo: str
-    members_count: int
+    photo: str | None
+    members_count: int | None
     is_gold: int
     owner_id: int
-    admin_ids: list[int]
-    bot_ids: list[int]
-    role: int
-    immune: int
-    warns: int
+    admin_ids: list[int] | None
+    bot_ids: list[int] | None
+    role: int | None
+    immune: int | None
+    warns: int | None
     max_warns: int
 
 
@@ -38,12 +38,12 @@ class ChatGetMembersResponse(BaseResponse):
 class ChatMember(BaseModel):
     id: int
     role: int
-    immune: int
+    immune: int | None
     status: ChatMemberStatus
-    warns: int
+    warns: int | None
     messages: int
-    ban_expire: int
-    mute_expire: int
+    ban_expire: int | None
+    mute_expire: int | None
 
 
 class ChatGetRolesResponse(BaseResponse):

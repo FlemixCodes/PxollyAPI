@@ -1,6 +1,7 @@
 from ._base import BaseResponse
 from .account import AccountGetInfoResponse, AccountGetInfo
 from .database import DatabaseGetResponse, DatabaseGetIris
+from .utils import UtilsGetServerTimeExtended, UtilsGetServerTimeResponse
 
 from .callback import (
     CallbackGetSettings,
@@ -26,4 +27,13 @@ from .chats import (
     ChatSendMessageResponse,
     ChatSetMemberRoleResponse,
     ChatSetSilenceModeResponse,
+)
+
+from .users import (
+    GetUserRegisterdDate,
+    GetUserRegisterdDateResponse,
+    GetUserStickerPacks,
+    GetUserStickerPacksResponse,
+    UserStickerPacksAmount,
+    UserStickerPacksCategory,
 )
