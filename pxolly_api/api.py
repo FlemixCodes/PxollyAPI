@@ -72,4 +72,4 @@ class PxollyAPI:
 
     async def close(self) -> None:
         """Закрыть соединение с API"""
-        await self.session.close()
+        await self._session.close()

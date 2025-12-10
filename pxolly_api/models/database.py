@@ -4,10 +4,15 @@ from pxolly_api.models import BaseResponse
 
 
 class DatabaseGetResponse(BaseResponse):
-    response: list[DatabaseGetIris]
+    response: DatabaseGetIris
 
 
 class DatabaseGetIris(BaseModel):
+    count: int
+    items: list[DatabaseGetIrisMember]
+
+
+class DatabaseGetIrisMember(BaseModel):
     user_id: int
     last_banned: int
     spam_count: int | None

@@ -1,6 +1,6 @@
 from ._base import BaseResponse
 from .account import AccountGetInfoResponse, AccountGetInfo
-from .database import DatabaseGetResponse, DatabaseGetIris
+from .database import DatabaseGetResponse, DatabaseGetIris, DatabaseGetIrisMember
 from .utils import UtilsGetServerTimeExtended, UtilsGetServerTimeResponse
 
 from .callback import (

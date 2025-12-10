@@ -1,17 +1,3 @@
-### Pxolly API
-Библиотека для взаимодействия с API чат менеджера Pxolly (https://api.pxolly.ru)
-
-### Инструменты
-* Язык: Python
-* Валидация: Pydantic
-* HTTP Клиент: niquests
-* Тестирование: pytest
-* Менеджер пакетов: UV
-
-
-### Использование (example.py)
-```python
-
 import asyncio
 
 from pxolly_api import PxollyAPI
@@ -31,5 +17,3 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-```

@@ -1,5 +1,5 @@
 from pxolly_api.methods import BaseMethodCategory
-from pxolly_api.models import DatabaseGetIris, DatabaseGetResponse
+from pxolly_api.models import DatabaseGetIris, DatabaseGetResponse, DatabaseGetIrisMember
 from pxolly_api.enums import DatabaseID
 
 
@@ -18,4 +18,6 @@ class DatabaseCategory(BaseMethodCategory):
         """
         params = {"database_id": database_id, "user_ids": user_ids, "allow_fakes": allow_fakes, "key": key}
         response = await self.api.method("database.get", params)
-        return DatabaseGetResponse(response=[DatabaseGetIris(**iris) for iris in response["response"]], raw_response=response)
+
+        response_items = [DatabaseGetIrisMember(**item) for item in response["response"]["items"]]
+        return DatabaseGetResponse(response=DatabaseGetIris(count=response["response"]["count"], items=response_items), raw_response=response)
