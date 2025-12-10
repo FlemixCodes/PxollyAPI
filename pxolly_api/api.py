@@ -31,6 +31,12 @@ class PxollyAPI:
         self.users = UsersCategory(self)
         self.utils = UtilsCategory(self)
 
+    async def __aenter__(self) -> PxollyAPI:
+        return self
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
+        await self.close()
+
     async def method(self, method: str, params: dict | None = None) -> dict:
         """
         Выполнить запрос к API
