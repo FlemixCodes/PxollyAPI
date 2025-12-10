@@ -5,6 +5,3 @@
 * Язык: Python
 * Валидация: Pydantic
 * HTTP Клиент: niquests
-
-### Автор
-* Flemix
