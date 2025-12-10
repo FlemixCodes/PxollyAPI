@@ -17,7 +17,7 @@ from pxolly_api import PxollyAPI
 from pxolly_api.exceptions import PxollyAPIError
 
 
-## Способ 1
+# Способ 1
 async def main():
     try:
         pxolly_api = PxollyAPI(token="token")
@@ -29,7 +29,7 @@ async def main():
         await pxolly_api.close()
 
 
-## Способ 2
+# Способ 2
 async def main():
     async with PxollyAPI(token="token") as pxolly_api:
         try:
