@@ -24,7 +24,7 @@ class ChatMemberStatus(StrEnum):
     KICKED = "kicked"
     BANNED = "banned"
     LEFT = "left"
-    MEMBER = "member"
+    IN = "in"
 
 
 class ChatMemberFilter(StrEnum):

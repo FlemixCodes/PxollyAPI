@@ -74,7 +74,7 @@ class ChatsCategory(BaseMethodCategory):
         response = await self.api.method("chats.getMembers", params)
         return ChatGetMembersResponse(response=[ChatMember(**member) for member in response["response"]], raw_response=response)
 
-    async def get_members_by_id(self, chat_id: str, user_ids: list[str]) -> ChatGetMembersResponse:
+    async def get_members_by_id(self, chat_id: str, user_ids: str) -> ChatGetMembersResponse:
         """
         Получить участников чата по их ID
         Документация: https://vk.com/app7273656#/dev/method/chats.getMembersById

@@ -60,10 +60,10 @@ class PxollyAPI:
 
     async def execute(self, code: str) -> dict:
         """
-        Выполнить код PxollyLang
+        Выполнить несколько запросов к API
         Документация: https://vk.com/app7273656#/dev/method/execute
 
-        :param code: Код PxollyLang
+        :param code: код запросов
         :return: dict
         """
 

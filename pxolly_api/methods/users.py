@@ -12,7 +12,7 @@ from pxolly_api.models import (
 class UsersCategory(BaseMethodCategory):
     """Методы для работы с пользователями"""
 
-    async def get_registered_date(self, user_ids: list[int]) -> GetUserRegisterdDateResponse:
+    async def get_registered_date(self, user_ids: str) -> GetUserRegisterdDateResponse:
         """
         Получить дату регистрации пользователей
         Документация: https://vk.com/app7273656#/dev/method/users.getRegisteredDate
