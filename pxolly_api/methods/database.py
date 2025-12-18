@@ -19,5 +19,7 @@ class DatabaseCategory(BaseMethodCategory):
         params = {"database_id": database_id, "user_ids": user_ids, "allow_fakes": allow_fakes, "key": key}
         response = await self.api.method("database.get", params)
 
-        response_items = [DatabaseGetIrisMember(**item) for item in response["response"]["items"]]
+        if database_id == DatabaseID.IRIS:
+            response_items = [DatabaseGetIrisMember(**item) for item in response["response"]["items"]]
+
         return DatabaseGetResponse(response=DatabaseGetIris(count=response["response"]["count"], items=response_items), raw_response=response)
