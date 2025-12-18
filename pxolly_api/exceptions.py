@@ -26,4 +26,4 @@ class ApiError(PxollyAPIError):
         self.request_params = request_params
 
     def __str__(self):
-        return f"{self.error_code}: {self.error_msg}"
+        return f"{self.error_code} ({self.error_msg})"
