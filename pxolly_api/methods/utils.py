@@ -38,5 +38,4 @@ class UtilsCategory(BaseCategory):
 
         if extended:
             return UtilsGetServerTimeExtended(**response["response"])
-        else:
-            return UtilsGetServerTime(response=response["response"])
+        return UtilsGetServerTime(response=response["response"])
