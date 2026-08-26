@@ -20,16 +20,16 @@ class Chat(BaseModel):
 
     id: str
     title: str
-    photo: str | None
-    members_count: int | None
+    photo: str | None = None
+    members_count: int | None = None
     is_gold: int
     owner_id: int
-    admin_ids: list[int] | None
-    bot_ids: list[int] | None
-    role: int | None
-    immune: int | None
-    warns: int | None
-    max_warns: int | None
+    admin_ids: list[int] | None = None
+    bot_ids: list[int] | None = None
+    role: int | None = None
+    immune: int | None = None
+    warns: int | None = None
+    max_warns: int | None = None
 
 
 class ChatsGetByID(BaseModel):
@@ -43,12 +43,12 @@ class ChatMember(BaseModel):
 
     id: int
     role: int
-    immune: int | None
+    immune: int | None = None
     status: ChatMemberStatus
-    warns: int | None
+    warns: int | None = None
     messages: int
-    ban_expire: int | None
-    mute_expire: int | None
+    ban_expire: int | None = None
+    mute_expire: int | None = None
 
 
 class ChatMemberAccount(BaseModel):

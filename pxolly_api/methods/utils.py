@@ -18,7 +18,7 @@ class UtilsCategory(BaseCategory):
         """
         params = {"text": text, "dictionary": dictionary}
         response = await self.api.method("utils.checkText", params)
-        return UtilsCheckText(response=response["response"])
+        return UtilsCheckText(**response)
 
     @overload
     async def get_server_time(self, extended: Literal[False] = ...) -> UtilsGetServerTime: ...
@@ -38,4 +38,4 @@ class UtilsCategory(BaseCategory):
 
         if extended:
             return UtilsGetServerTimeExtended(**response["response"])
-        return UtilsGetServerTime(response=response["response"])
+        return UtilsGetServerTime(**response)

@@ -37,7 +37,7 @@ class CallbackCategory(BaseCategory):
         """
         params = {"url": url, "secret_key": secret_key, "is_hidden": is_hidden}
         response = await self.api.method("callback.editSettings", params)
-        return CallbackEditSettings(response=response["response"])
+        return CallbackEditSettings(**response)
 
     async def set_bot_prefix(self, prefix: str) -> CallbackSetBotPrefix:
         """
@@ -48,4 +48,4 @@ class CallbackCategory(BaseCategory):
         """
         params = {"prefix": prefix}
         response = await self.api.method("callback.setBotPrefix", params)
-        return CallbackSetBotPrefix(response=response["response"])
+        return CallbackSetBotPrefix(**response)

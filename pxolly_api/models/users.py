@@ -18,8 +18,8 @@ class UserStickerPacksCategory(BaseModel):
     """Категория стикерпаков пользователя"""
 
     count: int
-    animated_count: int | None
-    pack_titles: list[str] | None
+    animated_count: int | None = None
+    pack_titles: list[str] | None = None
 
 
 class UserStickerPacksAmount(BaseModel):
