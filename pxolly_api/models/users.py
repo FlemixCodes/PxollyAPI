@@ -13,11 +13,6 @@ class GetUserRegisteredDate(BaseModel):
 
     response: list[UserRegisteredDate]
 
-    @classmethod
-    def from_response(cls, response: list) -> "GetUserRegisteredDate":
-        dates = [UserRegisteredDate(**date) for date in response]
-        return cls(response=dates)
-
 
 class UserStickerPacksCategory(BaseModel):
     """Категория стикерпаков пользователя"""
