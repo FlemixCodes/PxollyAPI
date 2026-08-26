@@ -24,4 +24,4 @@ class DatabaseCategory(BaseCategory):
         """
         params = {"database_id": database_id, "user_ids": user_ids, "allow_fakes": allow_fakes, "key": key}
         response = await self.api.method("database.get", params)
-        return DatabaseGet.from_response(response=response["response"], database_id=database_id)
+        return DatabaseGet(response=response["response"])

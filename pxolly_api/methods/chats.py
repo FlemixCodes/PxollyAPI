@@ -53,7 +53,7 @@ class ChatsCategory(BaseCategory):
         """
         params = {"chat_ids": chat_ids, "fields": fields}
         response = await self.api.method("chats.getById", params)
-        return ChatsGetByID.from_response(response["response"])
+        return ChatsGetByID(response=response["response"])
 
     async def get_members(self, chat_id: str, count: int, offset: int, filter: ChatMemberFilter) -> ChatGetMembers:
         """
@@ -67,7 +67,7 @@ class ChatsCategory(BaseCategory):
         """
         params = {"chat_id": chat_id, "count": count, "offset": offset, "filter": filter}
         response = await self.api.method("chats.getMembers", params)
-        return ChatGetMembers.from_response(response=response["response"])
+        return ChatGetMembers(**response["response"])
 
     async def get_members_by_id(self, chat_id: str, user_ids: str) -> ChatGetMembersById:
         """
@@ -79,7 +79,7 @@ class ChatsCategory(BaseCategory):
         """
         params = {"chat_id": chat_id, "user_ids": user_ids}
         response = await self.api.method("chats.getMembersById", params)
-        return ChatGetMembersById.from_response(response=response["response"])
+        return ChatGetMembersById(response=response["response"])
 
     async def get_roles(self, chat_id: str) -> ChatGetRoles:
         """
@@ -90,7 +90,7 @@ class ChatsCategory(BaseCategory):
         """
         params = {"chat_id": chat_id}
         response = await self.api.method("chats.getRoles", params)
-        return ChatGetRoles.from_response(response["response"])
+        return ChatGetRoles(response=response["response"])
 
     async def get_rules(self, chat_id: str) -> ChatGetRules:
         """
@@ -101,7 +101,7 @@ class ChatsCategory(BaseCategory):
         """
         params = {"chat_id": chat_id}
         response = await self.api.method("chats.getRules", params)
-        return ChatGetRules.from_response(response["response"])
+        return ChatGetRules(**response["response"])
 
     async def send_message(self, chat_id: str, text: str, random_id: int) -> ChatSendMessage:
         """

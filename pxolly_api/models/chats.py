@@ -37,27 +37,6 @@ class ChatsGetByID(BaseModel):
 
     response: list[Chat]
 
-    @classmethod
-    def from_response(cls, response: dict) -> "ChatsGetByID":
-        chats = [
-            Chat(
-                id=chat["id"],
-                title=chat["title"],
-                photo=chat.get("photo"),
-                members_count=chat.get("members_count"),
-                is_gold=chat["is_gold"],
-                owner_id=chat["owner_id"],
-                admin_ids=chat.get("admin_ids"),
-                bot_ids=chat.get("bot_ids"),
-                role=chat.get("role"),
-                immune=chat.get("immune"),
-                warns=chat.get("warns"),
-                max_warns=chat.get("max_warns"),
-            )
-            for chat in response
-        ]
-        return cls(response=chats)
-
 
 class ChatMember(BaseModel):
     """Участник чата"""
@@ -87,23 +66,6 @@ class ChatGetMembersById(BaseModel):
 
     response: list[ChatMember]
 
-    @classmethod
-    def from_response(cls, response: list) -> "ChatGetMembersById":
-        members = [
-            ChatMember(
-                id=member["id"],
-                role=member["role"],
-                immune=member.get("immune"),
-                status=member["status"],
-                warns=member.get("warns"),
-                messages=member["messages"],
-                ban_expire=member.get("ban_expire"),
-                mute_expire=member.get("mute_expire"),
-            )
-            for member in response
-        ]
-        return cls(response=members)
-
 
 class ChatGetMembers(BaseModel):
     """Участники чата"""
@@ -111,24 +73,6 @@ class ChatGetMembers(BaseModel):
     count: int
     items: list[ChatMember]
     accounts: list[ChatMemberAccount]
-
-    @classmethod
-    def from_response(cls, response: dict) -> "ChatGetMembers":
-        members = [
-            ChatMember(
-                id=member["id"],
-                role=member["role"],
-                immune=member.get("immune"),
-                status=member["status"],
-                warns=member.get("warns"),
-                messages=member["messages"],
-                ban_expire=member.get("ban_expire"),
-                mute_expire=member.get("mute_expire"),
-            )
-            for member in response["items"]
-        ]
-        accounts = [ChatMemberAccount(**account) for account in response["accounts"]]
-        return cls(count=response["count"], items=members, accounts=accounts)
 
 
 class ChatRole(BaseModel):
@@ -143,11 +87,6 @@ class ChatGetRoles(BaseModel):
 
     response: list[ChatRole]
 
-    @classmethod
-    def from_response(cls, response: dict) -> "ChatGetRoles":
-        roles = [ChatRole(**role) for role in response]
-        return cls(response=roles)
-
 
 class ChatFormattingEntity(BaseModel):
     """Формат текста"""
@@ -155,7 +94,7 @@ class ChatFormattingEntity(BaseModel):
     type: FormattingEntityType
     offset: int
     length: int
-    url: str = None
+    url: str | None = None
 
 
 class ChatGetRules(BaseModel):
@@ -164,11 +103,6 @@ class ChatGetRules(BaseModel):
     text: str
     entities: list[ChatFormattingEntity]
     owner_id: int
-
-    @classmethod
-    def from_response(cls, response: dict) -> "ChatGetRules":
-        entities = [ChatFormattingEntity(**entity) for entity in response["entities"]]
-        return cls(text=response["text"], entities=entities, owner_id=response["owner_id"])
 
 
 class ChatSendMessage(BaseModel):

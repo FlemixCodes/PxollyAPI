@@ -14,7 +14,7 @@ class UsersCategory(BaseCategory):
         """
         params = {"user_ids": user_ids}
         response = await self.api.method("users.getRegisteredDate", params)
-        return GetUserRegisteredDate.from_response(response["response"])
+        return GetUserRegisteredDate(response=response["response"])
 
     async def get_sticker_packs(self, user_id: int, max_count: int, need_titles: bool = False) -> GetUserStickerPacks:
         """
@@ -27,4 +27,4 @@ class UsersCategory(BaseCategory):
         """
         params = {"user_id": user_id, "max_count": max_count, "need_titles": need_titles}
         response = await self.api.method("users.getStickerPacks", params)
-        return GetUserStickerPacks.from_response(response=response["response"])
+        return GetUserStickerPacks(**response["response"])
