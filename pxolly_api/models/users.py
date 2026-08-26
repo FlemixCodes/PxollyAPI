@@ -38,34 +38,3 @@ class GetUserStickerPacks(BaseModel):
     free: UserStickerPacksCategory
     paid: UserStickerPacksCategory
     collectible: UserStickerPacksCategory
-
-    @classmethod
-    def from_response(cls, response: dict) -> "GetUserStickerPacks":
-        amount = UserStickerPacksAmount(**response["amount"])
-
-        free = UserStickerPacksCategory(
-            count=response["free"]["count"],
-            animated_count=response["free"].get("animated_count"),
-            pack_titles=response["free"].get("pack_titles"),
-        )
-
-        paid = UserStickerPacksCategory(
-            count=response["paid"]["count"],
-            animated_count=response["paid"].get("animated_count"),
-            pack_titles=response["paid"].get("pack_titles"),
-        )
-
-        collectible = UserStickerPacksCategory(
-            count=response["collectible"]["count"],
-            animated_count=response["collectible"].get("animated_count"),
-            pack_titles=response["collectible"].get("pack_titles"),
-        )
-
-        return cls(
-            name=response["name"],
-            total_count=response["total_count"],
-            amount=amount,
-            free=free,
-            paid=paid,
-            collectible=collectible,
-        )
