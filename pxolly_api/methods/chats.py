@@ -1,3 +1,4 @@
+from ..enums import ChatMemberFilter
 from ..models.chats import (
     ChatBanMember,
     ChatEditTitle,
@@ -10,7 +11,6 @@ from ..models.chats import (
     ChatSetSilenceMode,
     ChatsGetByID,
 )
-from ..types import ChatMemberFilterOrStr
 from ._base import BaseCategory
 
 
@@ -55,7 +55,7 @@ class ChatsCategory(BaseCategory):
         response = await self.api.method("chats.getById", params)
         return ChatsGetByID.from_response(response["response"])
 
-    async def get_members(self, chat_id: str, count: int, offset: int, filter: ChatMemberFilterOrStr) -> ChatGetMembers:
+    async def get_members(self, chat_id: str, count: int, offset: int, filter: ChatMemberFilter) -> ChatGetMembers:
         """
         Получить участников чата
         Документация: https://vk.com/app7273656#/dev/method/chats.getMembers

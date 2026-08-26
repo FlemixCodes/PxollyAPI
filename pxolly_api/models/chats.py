@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from ..types import ChatMemberStatusOrStr, FormattingEntityTypeOrStr
+from ..enums import ChatMemberStatus, FormattingEntityType
 
 
 class ChatBanMember(BaseModel):
@@ -65,7 +65,7 @@ class ChatMember(BaseModel):
     id: int
     role: int
     immune: int | None
-    status: ChatMemberStatusOrStr
+    status: ChatMemberStatus
     warns: int | None
     messages: int
     ban_expire: int | None
@@ -152,7 +152,7 @@ class ChatGetRoles(BaseModel):
 class ChatFormattingEntity(BaseModel):
     """Формат текста"""
 
-    type: FormattingEntityTypeOrStr
+    type: FormattingEntityType
     offset: int
     length: int
     url: str = None
