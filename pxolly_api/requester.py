@@ -15,6 +15,11 @@ class ErrorDict(TypedDict):
     confirmation_text: str | None
 
 
+class ResponseDict(TypedDict):
+    response: dict[str, Any]
+    error: ErrorDict | None
+
+
 class PxollyRequester:
     API_URL = "https://api.pxolly.ru/method"
 
@@ -24,13 +29,13 @@ class PxollyRequester:
         self.http_client = http_client or httpx.AsyncClient(base_url=self.API_URL)
         self._base_params = {"v": self._version, "access_token": self._token}
 
-    async def method(self, method: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
+    async def method(self, method: str, params: dict[str, Any] | None = None) -> ResponseDict:
         method_params = params or {}
         finally_params = {**self._base_params, **method_params}
         response = await self.http_client.get(method, params=finally_params)
 
         try:
-            data: dict[str, Any] = response.json()
+            data: ResponseDict = response.json()
             error: ErrorDict | None = data.get("error")
         except json.JSONDecodeError as exception:
             raise ResponseError(f"Invalid response: {exception}")
@@ -48,7 +53,7 @@ class PxollyRequester:
 
         return data
 
-    async def execute(self, code: str) -> dict[str, Any]:
+    async def execute(self, code: str) -> ResponseDict:
         params = {"code": code}
         return await self.method("execute", params)
 

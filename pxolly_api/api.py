@@ -12,7 +12,7 @@ from pxolly_api.methods import (
     UsersCategory,
     UtilsCategory,
 )
-from pxolly_api.requester import PxollyRequester
+from pxolly_api.requester import PxollyRequester, ResponseDict
 
 
 class PxollyAPI:
@@ -63,7 +63,7 @@ class PxollyAPI:
     async def __aexit__(self, type: type[BaseException], value: BaseException, traceback: TracebackType) -> None:
         await self.close()
 
-    async def method(self, method: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
+    async def method(self, method: str, params: dict[str, Any] | None = None) -> ResponseDict:
         """
         Вызвать метод API
 
@@ -73,7 +73,7 @@ class PxollyAPI:
         """
         return await self.requester.method(method, params)
 
-    async def execute(self, code: str) -> dict[str, Any]:
+    async def execute(self, code: str) -> ResponseDict:
         """
         Выполнить несколько методов API
         Документация: https://vk.com/app7273656#/dev/method/execute
