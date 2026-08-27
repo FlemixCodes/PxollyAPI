@@ -15,11 +15,6 @@ class ErrorDict(TypedDict):
     confirmation_text: str | None
 
 
-class ResponseDict(TypedDict):
-    response: dict[str, Any]
-    error: ErrorDict | None
-
-
 class PxollyRequester:
     API_URL = "https://api.pxolly.ru/method"
 
@@ -35,7 +30,7 @@ class PxollyRequester:
         response = await self.http_client.get(method, params=finally_params)
 
         try:
-            data: ResponseDict = response.json()
+            data: dict[str, Any] = response.json()
             error: ErrorDict | None = data.get("error")
         except json.JSONDecodeError as exception:
             raise ResponseError(f"Invalid response: {exception}")
