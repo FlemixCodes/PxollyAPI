@@ -1,6 +1,6 @@
-from ..enums import DatabaseID
-from ..models.database import DatabaseGet
-from ..requester import PxollyRequester
+from pxolly_api.enums import DatabaseID
+from pxolly_api.models.database import DatabaseGet
+from pxolly_api.requester import PxollyRequester
 
 
 class DatabaseCategory:

@@ -1,5 +1,5 @@
-from ..models.account import AccountGetInfo
-from ..requester import PxollyRequester
+from pxolly_api.models.account import AccountGetInfo
+from pxolly_api.requester import PxollyRequester
 
 
 class AccountCategory:

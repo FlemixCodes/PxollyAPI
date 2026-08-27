@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from ..enums import AccountType
+from pxolly_api.enums import AccountType
 
 
 class AccountGetInfo(BaseModel):

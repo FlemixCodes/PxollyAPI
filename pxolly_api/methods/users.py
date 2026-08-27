@@ -1,5 +1,5 @@
-from ..models.users import GetUserRegisteredDate, GetUserStickerPacks
-from ..requester import PxollyRequester
+from pxolly_api.models.users import GetUserRegisteredDate, GetUserStickerPacks
+from pxolly_api.requester import PxollyRequester
 
 
 class UsersCategory:

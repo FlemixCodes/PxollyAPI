@@ -2,7 +2,7 @@ from typing import Any
 
 import niquests
 
-from .exceptions import ApiError, RequestError, ResponseError
+from pxolly_api.exceptions import ApiError, RequestError, ResponseError
 
 
 class PxollyRequester:

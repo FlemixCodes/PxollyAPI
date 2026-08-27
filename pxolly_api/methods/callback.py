@@ -1,10 +1,10 @@
-from ..models.callback import (
+from pxolly_api.models.callback import (
     CallbackEditSettings,
     CallbackGetConfirmationCode,
     CallbackGetSettings,
     CallbackSetBotPrefix,
 )
-from ..requester import PxollyRequester
+from pxolly_api.requester import PxollyRequester
 
 
 class CallbackCategory:

@@ -1,5 +1,5 @@
-from ..enums import ChatMemberFilter
-from ..models.chats import (
+from pxolly_api.enums import ChatMemberFilter
+from pxolly_api.models.chats import (
     ChatBanMember,
     ChatEditTitle,
     ChatGetMembers,
@@ -11,7 +11,7 @@ from ..models.chats import (
     ChatSetSilenceMode,
     ChatsGetByID,
 )
-from ..requester import PxollyRequester
+from pxolly_api.requester import PxollyRequester
 
 
 class ChatsCategory:

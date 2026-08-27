@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from ..enums import ChatMemberStatus, FormattingEntityType
+from pxolly_api.enums import ChatMemberStatus, FormattingEntityType
 
 
 class ChatBanMember(BaseModel):

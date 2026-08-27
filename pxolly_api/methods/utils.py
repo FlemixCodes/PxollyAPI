@@ -1,7 +1,7 @@
 from typing import Literal, overload
 
-from ..models.utils import UtilsCheckText, UtilsGetServerTime, UtilsGetServerTimeExtended
-from ..requester import PxollyRequester
+from pxolly_api.models.utils import UtilsCheckText, UtilsGetServerTime, UtilsGetServerTimeExtended
+from pxolly_api.requester import PxollyRequester
 
 
 class UtilsCategory:

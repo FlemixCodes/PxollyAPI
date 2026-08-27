@@ -3,8 +3,15 @@ from typing import Any
 
 import niquests
 
-from .methods import AccountCategory, CallbackCategory, ChatsCategory, DatabaseCategory, UsersCategory, UtilsCategory
-from .requester import PxollyRequester
+from pxolly_api.methods import (
+    AccountCategory,
+    CallbackCategory,
+    ChatsCategory,
+    DatabaseCategory,
+    UsersCategory,
+    UtilsCategory,
+)
+from pxolly_api.requester import PxollyRequester
 
 
 class PxollyAPI:
