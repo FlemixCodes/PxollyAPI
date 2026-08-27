@@ -12,13 +12,13 @@ class PxollyRequester:
     def __init__(self, token: str, version: str = "2.5", http_client: httpx.AsyncClient | None = None) -> None:
         self._token = token
         self._version = version
-        self._http_client = http_client or httpx.AsyncClient(base_url=self.API_URL)
+        self.http_client = http_client or httpx.AsyncClient(base_url=self.API_URL)
         self._base_params = {"v": self._version, "access_token": self._token}
 
     async def method(self, method: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
         method_params = params or {}
         finally_params = {**self._base_params, **method_params}
-        response = await self._http_client.get(method, params=finally_params)
+        response = await self.http_client.get(method, params=finally_params)
 
         try:
             data: dict[str, Any] = response.json()
@@ -44,4 +44,4 @@ class PxollyRequester:
         return await self.method("execute", params)
 
     async def close(self) -> None:
-        await self._http_client.aclose()
+        await self.http_client.aclose()

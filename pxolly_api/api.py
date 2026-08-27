@@ -24,13 +24,13 @@ class PxollyAPI:
         :param http_client: HTTP клиент httpx.AsyncClient
         """
 
-        self._requester = PxollyRequester(token, version, http_client)
-        self._account = AccountCategory(self._requester)
-        self._callback = CallbackCategory(self._requester)
-        self._chats = ChatsCategory(self._requester)
-        self._database = DatabaseCategory(self._requester)
-        self._users = UsersCategory(self._requester)
-        self._utils = UtilsCategory(self._requester)
+        self.requester = PxollyRequester(token, version, http_client)
+        self._account = AccountCategory(self.requester)
+        self._callback = CallbackCategory(self.requester)
+        self._chats = ChatsCategory(self.requester)
+        self._database = DatabaseCategory(self.requester)
+        self._users = UsersCategory(self.requester)
+        self._utils = UtilsCategory(self.requester)
 
     @property
     def account(self) -> AccountCategory:
@@ -76,7 +76,7 @@ class PxollyAPI:
         :param params: Параметры запроса
         :return: dict
         """
-        return await self._requester.method(method, params)
+        return await self.requester.method(method, params)
 
     async def execute(self, code: str) -> dict[str, Any]:
         """
@@ -86,8 +86,8 @@ class PxollyAPI:
         :param code: Код запросов
         :return: dict
         """
-        return await self._requester.execute(code)
+        return await self.requester.execute(code)
 
     async def close(self) -> None:
         """Закрыть соединение с API"""
-        await self._requester.close()
+        await self.requester.close()
