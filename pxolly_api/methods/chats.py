@@ -28,7 +28,7 @@ class ChatsCategory(BaseCategory):
         :param reason: Причина
         """
         params = {"chat_id": chat_id, "member_id": member_id, "date": date, "reason": reason}
-        response = await self.api.method("chats.banMember", params)
+        response = await self.requester.method("chats.banMember", params)
         return ChatBanMember(**response)
 
     async def edit_title(self, chat_id: str, title: str) -> ChatEditTitle:
@@ -40,7 +40,7 @@ class ChatsCategory(BaseCategory):
         :param title: Новое название
         """
         params = {"chat_id": chat_id, "title": title}
-        response = await self.api.method("chats.editTitle", params)
+        response = await self.requester.method("chats.editTitle", params)
         return ChatEditTitle(**response)
 
     async def get_by_id(self, chat_ids: str, fields: str | None = None) -> ChatsGetByID:
@@ -52,7 +52,7 @@ class ChatsCategory(BaseCategory):
         :param fields: Дополнительные поля с информацией
         """
         params = {"chat_ids": chat_ids, "fields": fields}
-        response = await self.api.method("chats.getById", params)
+        response = await self.requester.method("chats.getById", params)
         return ChatsGetByID(**response)
 
     async def get_members(self, chat_id: str, count: int, offset: int, filter: ChatMemberFilter) -> ChatGetMembers:
@@ -66,7 +66,7 @@ class ChatsCategory(BaseCategory):
         :param filter: Фильтр участников
         """
         params = {"chat_id": chat_id, "count": count, "offset": offset, "filter": filter}
-        response = await self.api.method("chats.getMembers", params)
+        response = await self.requester.method("chats.getMembers", params)
         return ChatGetMembers(**response["response"])
 
     async def get_members_by_id(self, chat_id: str, user_ids: str) -> ChatGetMembersById:
@@ -78,7 +78,7 @@ class ChatsCategory(BaseCategory):
         :param user_ids: ID участников
         """
         params = {"chat_id": chat_id, "user_ids": user_ids}
-        response = await self.api.method("chats.getMembersById", params)
+        response = await self.requester.method("chats.getMembersById", params)
         return ChatGetMembersById(**response)
 
     async def get_roles(self, chat_id: str) -> ChatGetRoles:
@@ -89,7 +89,7 @@ class ChatsCategory(BaseCategory):
         :param chat_id: ID чата
         """
         params = {"chat_id": chat_id}
-        response = await self.api.method("chats.getRoles", params)
+        response = await self.requester.method("chats.getRoles", params)
         return ChatGetRoles(**response)
 
     async def get_rules(self, chat_id: str) -> ChatGetRules:
@@ -100,7 +100,7 @@ class ChatsCategory(BaseCategory):
         :param chat_id: ID чата
         """
         params = {"chat_id": chat_id}
-        response = await self.api.method("chats.getRules", params)
+        response = await self.requester.method("chats.getRules", params)
         return ChatGetRules(**response["response"])
 
     async def send_message(self, chat_id: str, text: str, random_id: int) -> ChatSendMessage:
@@ -113,7 +113,7 @@ class ChatsCategory(BaseCategory):
         :param random_id: уникальный идентификатор сообщения
         """
         params = {"chat_id": chat_id, "text": text, "random_id": random_id}
-        response = await self.api.method("chats.sendMessage", params)
+        response = await self.requester.method("chats.sendMessage", params)
         return ChatSendMessage(**response)
 
     async def set_member_role(self, chat_id: str, member_id: int, role_id: int) -> ChatSetMemberRole:
@@ -126,7 +126,7 @@ class ChatsCategory(BaseCategory):
         :param role_id: приоритет роли
         """
         params = {"chat_id": chat_id, "member_id": member_id, "role_id": role_id}
-        response = await self.api.method("chats.setMemberRole", params)
+        response = await self.requester.method("chats.setMemberRole", params)
         return ChatSetMemberRole(**response)
 
     async def set_silence_mode(self, chat_id: str, time: int) -> ChatSetSilenceMode:
@@ -138,5 +138,5 @@ class ChatsCategory(BaseCategory):
         :param time: Время (-1 включить сообщения, 0 - отключить сообщения, >60 - отключить временно)
         """
         params = {"chat_id": chat_id, "time": time}
-        response = await self.api.method("chats.setSilenceMode", params)
+        response = await self.requester.method("chats.setSilenceMode", params)
         return ChatSetSilenceMode(**response)

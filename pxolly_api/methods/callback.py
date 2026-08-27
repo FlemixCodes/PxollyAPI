@@ -15,7 +15,7 @@ class CallbackCategory(BaseCategory):
         Получить настройки Callback API текущего аккаунта
         Документация: https://vk.com/app7273656#/dev/method/callback.getSettings
         """
-        response = await self.api.method("callback.getSettings")
+        response = await self.requester.method("callback.getSettings")
         return CallbackGetSettings(**response["response"])
 
     async def get_confirmation_code(self) -> CallbackGetConfirmationCode:
@@ -23,7 +23,7 @@ class CallbackCategory(BaseCategory):
         Получить код для подтверждения Callback API
         Документация: https://vk.com/app7273656#/dev/method/callback.getConfirmationCode
         """
-        response = await self.api.method("callback.getConfirmationCode")
+        response = await self.requester.method("callback.getConfirmationCode")
         return CallbackGetConfirmationCode(**response["response"])
 
     async def edit_settings(self, url: str, secret_key: str, is_hidden: bool) -> CallbackEditSettings:
@@ -36,7 +36,7 @@ class CallbackCategory(BaseCategory):
         :param is_hidden: Скрыть адрес сервера Callback API
         """
         params = {"url": url, "secret_key": secret_key, "is_hidden": is_hidden}
-        response = await self.api.method("callback.editSettings", params)
+        response = await self.requester.method("callback.editSettings", params)
         return CallbackEditSettings(**response)
 
     async def set_bot_prefix(self, prefix: str) -> CallbackSetBotPrefix:
@@ -47,5 +47,5 @@ class CallbackCategory(BaseCategory):
         :param prefix: Префикс
         """
         params = {"prefix": prefix}
-        response = await self.api.method("callback.setBotPrefix", params)
+        response = await self.requester.method("callback.setBotPrefix", params)
         return CallbackSetBotPrefix(**response)

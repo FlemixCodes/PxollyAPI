@@ -1,3 +1,6 @@
+from typing import Any
+
+
 class PxollyException(Exception):
     """Общий класс всех исключений"""
 
@@ -18,7 +21,7 @@ class ApiError(PxollyException):
         error_code: int,
         error_msg: str,
         error_text: str | None = None,
-        request_params: dict | None = None,
+        request_params: dict[str, Any] | None = None,
     ) -> None:
         self.error_code = error_code
         self.error_msg = error_msg

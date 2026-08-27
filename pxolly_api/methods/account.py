@@ -10,5 +10,5 @@ class AccountCategory(BaseCategory):
         Получить информацию о текущем аккаунте
         Документация: https://vk.com/app7273656#/dev/method/account.getInfo
         """
-        response = await self.api.method("account.getInfo")
+        response = await self.requester.method("account.getInfo")
         return AccountGetInfo(**response["response"])

@@ -23,5 +23,5 @@ class DatabaseCategory(BaseCategory):
         :param key: Ключ для снятия ограничений
         """
         params = {"database_id": database_id, "user_ids": user_ids, "allow_fakes": allow_fakes, "key": key}
-        response = await self.api.method("database.get", params)
+        response = await self.requester.method("database.get", params)
         return DatabaseGet(**response)

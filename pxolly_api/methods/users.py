@@ -13,7 +13,7 @@ class UsersCategory(BaseCategory):
         :param user_ids: ID пользователей
         """
         params = {"user_ids": user_ids}
-        response = await self.api.method("users.getRegisteredDate", params)
+        response = await self.requester.method("users.getRegisteredDate", params)
         return GetUserRegisteredDate(**response)
 
     async def get_sticker_packs(self, user_id: int, max_count: int, need_titles: bool = False) -> GetUserStickerPacks:
@@ -26,5 +26,5 @@ class UsersCategory(BaseCategory):
         :param need_titles: Получить названия пакетов
         """
         params = {"user_id": user_id, "max_count": max_count, "need_titles": need_titles}
-        response = await self.api.method("users.getStickerPacks", params)
+        response = await self.requester.method("users.getStickerPacks", params)
         return GetUserStickerPacks(**response["response"])

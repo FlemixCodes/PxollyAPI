@@ -1,13 +1,10 @@
-import typing
-
-if typing.TYPE_CHECKING:
-    from ..api import PxollyAPI
+from ..requester import PxollyRequester
 
 
 class BaseCategory:
     """Базовая категория методов API"""
 
-    __slots__ = ("api",)
+    __slots__ = ("requester",)
 
-    def __init__(self, api: "PxollyAPI") -> None:
-        self.api = api
+    def __init__(self, requester: PxollyRequester) -> None:
+        self.requester = requester

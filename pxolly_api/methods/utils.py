@@ -17,7 +17,7 @@ class UtilsCategory(BaseCategory):
         :param dictionary: Название словаря
         """
         params = {"text": text, "dictionary": dictionary}
-        response = await self.api.method("utils.checkText", params)
+        response = await self.requester.method("utils.checkText", params)
         return UtilsCheckText(**response)
 
     @overload
@@ -34,7 +34,7 @@ class UtilsCategory(BaseCategory):
         :param extended: Вернуть подробное время
         """
         params = {"extended": extended}
-        response = await self.api.method("utils.getServerTime", params)
+        response = await self.requester.method("utils.getServerTime", params)
 
         if extended:
             return UtilsGetServerTimeExtended(**response["response"])
