@@ -49,6 +49,8 @@ class PxollyRequester:
                 error_msg=error["error_msg"],
                 error_text=error.get("error_text"),
                 request_params=error.get("request_params"),
+                error_subcode=error.get("error_subcode"),
+                confirmation_text=error.get("confirmation_text"),
             )
 
         return data
