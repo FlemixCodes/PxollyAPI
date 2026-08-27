@@ -30,7 +30,7 @@ class PxollyRequester:
         self._base_params = {"v": self._version, "access_token": self._token}
 
     async def method(self, method: str, params: dict[str, Any] | None = None) -> ResponseDict:
-        method_params = params or {}
+        method_params = params if params is not None else {}
         finally_params = {**self._base_params, **method_params}
         response = await self.http_client.get(method, params=finally_params)
 
