@@ -1,7 +1,7 @@
 from types import TracebackType
 from typing import Any
 
-import niquests
+import httpx
 
 from pxolly_api.methods import (
     AccountCategory,
@@ -17,7 +17,7 @@ from pxolly_api.requester import PxollyRequester
 class PxollyAPI:
     """Клиент для взаимодействия с API чат менеджера Pxolly"""
 
-    def __init__(self, token: str, version: str = "2.5", session: niquests.AsyncSession | None = None) -> None:
+    def __init__(self, token: str, version: str = "2.5", session: httpx.AsyncClient | None = None) -> None:
         """
         :param token: Токен доступа
         :param version: Версия

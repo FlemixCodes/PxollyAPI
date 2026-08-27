@@ -1,6 +1,7 @@
+import json
 from typing import Any
 
-import niquests
+import httpx
 
 from pxolly_api.exceptions import ApiError, RequestError, ResponseError
 
@@ -8,10 +9,10 @@ from pxolly_api.exceptions import ApiError, RequestError, ResponseError
 class PxollyRequester:
     API_URL = "https://api.pxolly.ru/method"
 
-    def __init__(self, token: str, version: str = "2.5", session: niquests.AsyncSession | None = None) -> None:
+    def __init__(self, token: str, version: str = "2.5", session: httpx.AsyncClient | None = None) -> None:
         self._token = token
         self._version = version
-        self._session = session or niquests.AsyncSession(base_url=self.API_URL)
+        self._session = session or httpx.AsyncClient(base_url=self.API_URL)
         self._base_params = {"v": self._version, "access_token": self._token}
 
     async def method(self, method: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -21,17 +22,15 @@ class PxollyRequester:
 
         try:
             data: dict[str, Any] = response.json()
-            error = data.get("error")
-        except niquests.JSONDecodeError as error:
-            raise ResponseError(f"Invalid response: {error}")
+            error: dict[str, Any] | None = data.get("error")
+        except json.JSONDecodeError as exception:
+            raise ResponseError(f"Invalid response: {exception}")
 
-        if response.status_code in (niquests.codes.not_found, niquests.codes.forbidden):
+        if response.status_code in (httpx.codes.NOT_FOUND, httpx.codes.FORBIDDEN):
             raise RequestError(f"Invalid request: {error}")
 
         if error:
-            raise ApiError(
-                error["error_code"], error["error_msg"], error.get("error_text"), error.get("request_params")
-            )
+            raise ApiError(**error)
 
         return data
 
@@ -40,4 +39,4 @@ class PxollyRequester:
         return await self.method("execute", params)
 
     async def close(self) -> None:
-        await self._session.close()
+        await self._session.aclose()
