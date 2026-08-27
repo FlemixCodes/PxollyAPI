@@ -76,6 +76,9 @@ result = await api.method("account.getInfo")
 [Пхолли](https://vk.com/pxolly)  
 Эпл в мире ботов ❤
 
+[Lightman LP](https://github.com/lightmanLP)
+Помог с ревью кода, указал на многие вещи о которых стоит задуматься (огромное человеческое спасибо) ✨
+
 ## Лицензия и авторство
 Проект распространяется под лицензией [MIT](LICENSE)  
 Copyright (C) 2026 [iflemix](https://github.com/iflemix)
