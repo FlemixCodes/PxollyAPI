@@ -17,14 +17,14 @@ from pxolly_api.requester import PxollyRequester
 class PxollyAPI:
     """Клиент для взаимодействия с API чат менеджера Pxolly"""
 
-    def __init__(self, token: str, version: str = "2.5", session: httpx.AsyncClient | None = None) -> None:
+    def __init__(self, token: str, version: str = "2.5", http_client: httpx.AsyncClient | None = None) -> None:
         """
         :param token: Токен доступа
         :param version: Версия
-        :param session: Сессия niquests.AsyncSession
+        :param http_client: HTTP клиент httpx.AsyncClient
         """
 
-        self._requester = PxollyRequester(token, version, session)
+        self._requester = PxollyRequester(token, version, http_client)
         self._account = AccountCategory(self._requester)
         self._callback = CallbackCategory(self._requester)
         self._chats = ChatsCategory(self._requester)
