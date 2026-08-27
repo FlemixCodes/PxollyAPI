@@ -1,11 +1,14 @@
 from typing import Literal, overload
 
-from ..models.utils import UtilsCheckText, UtilsGetServerTime, UtilsGetServerTimeExtended
-from ._base import BaseCategory
+from pxolly_api.models.utils import UtilsCheckText, UtilsGetServerTime, UtilsGetServerTimeExtended
+from pxolly_api.requester import PxollyRequester
 
 
-class UtilsCategory(BaseCategory):
+class UtilsCategory:
     """Методы для работы с утилитами"""
+
+    def __init__(self, requester: PxollyRequester) -> None:
+        self.requester = requester
 
     async def check_text(self, text: str, dictionary: str) -> UtilsCheckText:
         """
@@ -17,8 +20,8 @@ class UtilsCategory(BaseCategory):
         :param dictionary: Название словаря
         """
         params = {"text": text, "dictionary": dictionary}
-        response = await self.api.method("utils.checkText", params)
-        return UtilsCheckText(response=response["response"])
+        response = await self.requester.method("utils.checkText", params)
+        return UtilsCheckText(**response)
 
     @overload
     async def get_server_time(self, extended: Literal[False] = ...) -> UtilsGetServerTime: ...
@@ -34,8 +37,8 @@ class UtilsCategory(BaseCategory):
         :param extended: Вернуть подробное время
         """
         params = {"extended": extended}
-        response = await self.api.method("utils.getServerTime", params)
+        response = await self.requester.method("utils.getServerTime", params)
 
         if extended:
             return UtilsGetServerTimeExtended(**response["response"])
-        return UtilsGetServerTime(response=response["response"])
+        return UtilsGetServerTime(**response)

@@ -1,18 +1,15 @@
 from pydantic import BaseModel
 
-from ..enums import DatabaseID
-from ..types import DatabaseIDOrStr
-
 
 class DatabaseGetIrisMember(BaseModel):
     """Участник базы данных Iris"""
 
     user_id: int
     last_banned: int
-    spam_count: int | None
-    text: str | None
-    is_fake: int | None
-    comment: str | None
+    spam_count: int | None = None
+    text: str | None = None
+    is_fake: int | None = None
+    comment: str | None = None
 
 
 class DatabaseGetIris(BaseModel):
@@ -26,11 +23,3 @@ class DatabaseGet(BaseModel):
     """База данных"""
 
     response: DatabaseGetIris
-
-    @classmethod
-    def from_response(cls, response: dict, database_id: DatabaseIDOrStr) -> "DatabaseGet":
-        if database_id == DatabaseID.IRIS:
-            members = [DatabaseGetIrisMember(**member) for member in response["items"]]
-            response_model = DatabaseGetIris(count=response["count"], items=members)
-
-        return cls(response=response_model)

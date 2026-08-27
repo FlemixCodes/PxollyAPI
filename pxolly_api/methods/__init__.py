@@ -4,3 +4,5 @@ from .chats import ChatsCategory
 from .database import DatabaseCategory
 from .users import UsersCategory
 from .utils import UtilsCategory
+
+__all__ = ["AccountCategory", "CallbackCategory", "ChatsCategory", "DatabaseCategory", "UsersCategory", "UtilsCategory"]

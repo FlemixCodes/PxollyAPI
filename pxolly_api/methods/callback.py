@@ -1,21 +1,24 @@
-from ..models.callback import (
+from pxolly_api.models.callback import (
     CallbackEditSettings,
     CallbackGetConfirmationCode,
     CallbackGetSettings,
     CallbackSetBotPrefix,
 )
-from ._base import BaseCategory
+from pxolly_api.requester import PxollyRequester
 
 
-class CallbackCategory(BaseCategory):
+class CallbackCategory:
     """Методы для работы с Callback API сервером"""
+
+    def __init__(self, requester: PxollyRequester) -> None:
+        self.requester = requester
 
     async def get_settings(self) -> CallbackGetSettings:
         """
         Получить настройки Callback API текущего аккаунта
         Документация: https://vk.com/app7273656#/dev/method/callback.getSettings
         """
-        response = await self.api.method("callback.getSettings")
+        response = await self.requester.method("callback.getSettings")
         return CallbackGetSettings(**response["response"])
 
     async def get_confirmation_code(self) -> CallbackGetConfirmationCode:
@@ -23,7 +26,7 @@ class CallbackCategory(BaseCategory):
         Получить код для подтверждения Callback API
         Документация: https://vk.com/app7273656#/dev/method/callback.getConfirmationCode
         """
-        response = await self.api.method("callback.getConfirmationCode")
+        response = await self.requester.method("callback.getConfirmationCode")
         return CallbackGetConfirmationCode(**response["response"])
 
     async def edit_settings(self, url: str, secret_key: str, is_hidden: bool) -> CallbackEditSettings:
@@ -36,8 +39,8 @@ class CallbackCategory(BaseCategory):
         :param is_hidden: Скрыть адрес сервера Callback API
         """
         params = {"url": url, "secret_key": secret_key, "is_hidden": is_hidden}
-        response = await self.api.method("callback.editSettings", params)
-        return CallbackEditSettings(response=response["response"])
+        response = await self.requester.method("callback.editSettings", params)
+        return CallbackEditSettings(**response)
 
     async def set_bot_prefix(self, prefix: str) -> CallbackSetBotPrefix:
         """
@@ -47,5 +50,5 @@ class CallbackCategory(BaseCategory):
         :param prefix: Префикс
         """
         params = {"prefix": prefix}
-        response = await self.api.method("callback.setBotPrefix", params)
-        return CallbackSetBotPrefix(response=response["response"])
+        response = await self.requester.method("callback.setBotPrefix", params)
+        return CallbackSetBotPrefix(**response)

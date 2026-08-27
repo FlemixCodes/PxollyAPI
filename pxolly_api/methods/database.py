@@ -1,14 +1,17 @@
-from ..models.database import DatabaseGet
-from ..types import DatabaseIDOrStr
-from ._base import BaseCategory
+from pxolly_api.enums import DatabaseID
+from pxolly_api.models.database import DatabaseGet
+from pxolly_api.requester import PxollyRequester
 
 
-class DatabaseCategory(BaseCategory):
+class DatabaseCategory:
     """Методы для работы с базами данных"""
+
+    def __init__(self, requester: PxollyRequester) -> None:
+        self.requester = requester
 
     async def get(
         self,
-        database_id: DatabaseIDOrStr,
+        database_id: DatabaseID,
         user_ids: str,
         allow_fakes: bool,
         key: str | None = None,
@@ -23,5 +26,5 @@ class DatabaseCategory(BaseCategory):
         :param key: Ключ для снятия ограничений
         """
         params = {"database_id": database_id, "user_ids": user_ids, "allow_fakes": allow_fakes, "key": key}
-        response = await self.api.method("database.get", params)
-        return DatabaseGet.from_response(response=response["response"], database_id=database_id)
+        response = await self.requester.method("database.get", params)
+        return DatabaseGet(**response)

@@ -1,9 +1,12 @@
-from ..models.users import GetUserRegisteredDate, GetUserStickerPacks
-from ._base import BaseCategory
+from pxolly_api.models.users import GetUserRegisteredDate, GetUserStickerPacks
+from pxolly_api.requester import PxollyRequester
 
 
-class UsersCategory(BaseCategory):
+class UsersCategory:
     """Методы для работы с пользователями"""
+
+    def __init__(self, requester: PxollyRequester) -> None:
+        self.requester = requester
 
     async def get_registered_date(self, user_ids: str) -> GetUserRegisteredDate:
         """
@@ -13,8 +16,8 @@ class UsersCategory(BaseCategory):
         :param user_ids: ID пользователей
         """
         params = {"user_ids": user_ids}
-        response = await self.api.method("users.getRegisteredDate", params)
-        return GetUserRegisteredDate.from_response(response["response"])
+        response = await self.requester.method("users.getRegisteredDate", params)
+        return GetUserRegisteredDate(**response)
 
     async def get_sticker_packs(self, user_id: int, max_count: int, need_titles: bool = False) -> GetUserStickerPacks:
         """
@@ -26,5 +29,5 @@ class UsersCategory(BaseCategory):
         :param need_titles: Получить названия пакетов
         """
         params = {"user_id": user_id, "max_count": max_count, "need_titles": need_titles}
-        response = await self.api.method("users.getStickerPacks", params)
-        return GetUserStickerPacks.from_response(response=response["response"])
+        response = await self.requester.method("users.getStickerPacks", params)
+        return GetUserStickerPacks(**response["response"])

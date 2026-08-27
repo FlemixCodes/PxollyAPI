@@ -5,7 +5,7 @@ description = "Библиотека для взаимодействия с API �
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "niquests>=3.18.3",
+    "httpx>=0.28.1",
     "pydantic>=2.12.5",
 ]
 

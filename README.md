@@ -63,11 +63,11 @@ result = await api.method("account.getInfo")
 * Utils
 
 ## Зависимости и инструменты
-* Пакетный менеджер: uv
-* Линтер: ruff
-* HTTP клиент: niquests
-* Валидация: pydantic
-* Тестирование: pytest, pytest-asyncio
+* Пакетный менеджер: [uv](https://github.com/astral-sh/uv)
+* Линтер: [ruff](https://github.com/astral-sh/ruff)
+* HTTP клиент: [httpx](https://github.com/encode/httpx)
+* Валидация: [pydantic](https://github.com/pydantic/pydantic)
+* Тестирование: [pytest](https://github.com/pytest-dev/pytest), [pytest-asyncio](https://github.com/pytest-dev/pytest-asyncio)
 
 ## Благодарность
 [Полина Шатохина](https://vk.com/lilchacha)  
@@ -75,6 +75,9 @@ result = await api.method("account.getInfo")
 
 [Пхолли](https://vk.com/pxolly)  
 Эпл в мире ботов ❤
+
+[Lightman LP](https://github.com/lightmanLP)  
+Помог с ревью кода, указал на многие проблемы, подсказал пути решения и дал кучу полезных советов (огромное человеческое спасибо) ✨
 
 ## Лицензия и авторство
 Проект распространяется под лицензией [MIT](LICENSE)  

@@ -1,12 +1,12 @@
 from pydantic import BaseModel
 
-from ..types import AccountTypeOrStr
+from pxolly_api.enums import AccountType
 
 
 class AccountGetInfo(BaseModel):
     """Информация о текущем аккаунте"""
 
     user_id: int
-    account_type: AccountTypeOrStr
+    account_type: AccountType
     vk_added: int
     balance: int
