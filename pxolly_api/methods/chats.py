@@ -11,11 +11,14 @@ from ..models.chats import (
     ChatSetSilenceMode,
     ChatsGetByID,
 )
-from ._base import BaseCategory
+from ..requester import PxollyRequester
 
 
-class ChatsCategory(BaseCategory):
+class ChatsCategory:
     """Методы для работы с чатами"""
+
+    def __init__(self, requester: PxollyRequester) -> None:
+        self.requester = requester
 
     async def ban_member(self, chat_id: str, member_id: int, date: int, reason: str) -> ChatBanMember:
         """

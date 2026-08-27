@@ -1,9 +1,12 @@
 from ..models.users import GetUserRegisteredDate, GetUserStickerPacks
-from ._base import BaseCategory
+from ..requester import PxollyRequester
 
 
-class UsersCategory(BaseCategory):
+class UsersCategory:
     """Методы для работы с пользователями"""
+
+    def __init__(self, requester: PxollyRequester) -> None:
+        self.requester = requester
 
     async def get_registered_date(self, user_ids: str) -> GetUserRegisteredDate:
         """

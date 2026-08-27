@@ -1,9 +1,12 @@
 from ..models.account import AccountGetInfo
-from ._base import BaseCategory
+from ..requester import PxollyRequester
 
 
-class AccountCategory(BaseCategory):
+class AccountCategory:
     """Методы для работы с аккаунтом"""
+
+    def __init__(self, requester: PxollyRequester) -> None:
+        self.requester = requester
 
     async def get_info(self) -> AccountGetInfo:
         """

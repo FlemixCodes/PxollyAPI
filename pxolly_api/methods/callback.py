@@ -4,11 +4,14 @@ from ..models.callback import (
     CallbackGetSettings,
     CallbackSetBotPrefix,
 )
-from ._base import BaseCategory
+from ..requester import PxollyRequester
 
 
-class CallbackCategory(BaseCategory):
+class CallbackCategory:
     """Методы для работы с Callback API сервером"""
+
+    def __init__(self, requester: PxollyRequester) -> None:
+        self.requester = requester
 
     async def get_settings(self) -> CallbackGetSettings:
         """

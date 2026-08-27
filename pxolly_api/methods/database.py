@@ -1,10 +1,13 @@
 from ..enums import DatabaseID
 from ..models.database import DatabaseGet
-from ._base import BaseCategory
+from ..requester import PxollyRequester
 
 
-class DatabaseCategory(BaseCategory):
+class DatabaseCategory:
     """Методы для работы с базами данных"""
+
+    def __init__(self, requester: PxollyRequester) -> None:
+        self.requester = requester
 
     async def get(
         self,

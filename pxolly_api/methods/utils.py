@@ -1,11 +1,14 @@
 from typing import Literal, overload
 
 from ..models.utils import UtilsCheckText, UtilsGetServerTime, UtilsGetServerTimeExtended
-from ._base import BaseCategory
+from ..requester import PxollyRequester
 
 
-class UtilsCategory(BaseCategory):
+class UtilsCategory:
     """Методы для работы с утилитами"""
+
+    def __init__(self, requester: PxollyRequester) -> None:
+        self.requester = requester
 
     async def check_text(self, text: str, dictionary: str) -> UtilsCheckText:
         """
