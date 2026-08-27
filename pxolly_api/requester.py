@@ -1,5 +1,5 @@
 import json
-from typing import Any, TypedDict
+from typing import Any, NotRequired, TypedDict
 
 import httpx
 
@@ -9,15 +9,15 @@ from pxolly_api.exceptions import ApiError, RequestError, ResponseError
 class ErrorDict(TypedDict):
     error_code: int
     error_msg: str
-    error_text: str | None
-    request_params: list[dict[str, str]] | None
-    error_subcode: int | None
-    confirmation_text: str | None
+    error_text: NotRequired[str]
+    request_params: NotRequired[list[dict[str, str]]]
+    error_subcode: NotRequired[int]
+    confirmation_text: NotRequired[str]
 
 
 class ResponseDict(TypedDict):
     response: dict[str, Any]
-    error: ErrorDict | None
+    error: NotRequired[ErrorDict]
 
 
 class PxollyRequester:
