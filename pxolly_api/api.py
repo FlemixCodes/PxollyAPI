@@ -1,3 +1,4 @@
+from functools import cached_property
 from types import TracebackType
 from typing import Any
 
@@ -25,42 +26,36 @@ class PxollyAPI:
         """
 
         self.requester = PxollyRequester(token, version, http_client)
-        self._account = AccountCategory(self.requester)
-        self._callback = CallbackCategory(self.requester)
-        self._chats = ChatsCategory(self.requester)
-        self._database = DatabaseCategory(self.requester)
-        self._users = UsersCategory(self.requester)
-        self._utils = UtilsCategory(self.requester)
 
-    @property
+    @cached_property
     def account(self) -> AccountCategory:
         """Категория методов для работы с аккаунтом"""
-        return self._account
+        return AccountCategory(self.requester)
 
-    @property
+    @cached_property
     def callback(self) -> CallbackCategory:
         """Категория методов для работы с Callback API сервером"""
-        return self._callback
+        return CallbackCategory(self.requester)
 
-    @property
+    @cached_property
     def chats(self) -> ChatsCategory:
         """Категория методов для работы с чатами"""
-        return self._chats
+        return ChatsCategory(self.requester)
 
-    @property
+    @cached_property
     def database(self) -> DatabaseCategory:
         """Категория методов для работы с базами данных"""
-        return self._database
+        return DatabaseCategory(self.requester)
 
-    @property
+    @cached_property
     def users(self) -> UsersCategory:
         """Категория методов для работы с пользователями"""
-        return self._users
+        return UsersCategory(self.requester)
 
-    @property
+    @cached_property
     def utils(self) -> UtilsCategory:
         """Категория методов для работы с утилитами"""
-        return self._utils
+        return UtilsCategory(self.requester)
 
     async def __aenter__(self) -> "PxollyAPI":
         return self
