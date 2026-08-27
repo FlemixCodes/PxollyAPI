@@ -30,7 +30,12 @@ class PxollyRequester:
             raise RequestError(f"Invalid request: {error}")
 
         if error:
-            raise ApiError(**error)
+            raise ApiError(
+                error_code=error["error_code"],
+                error_msg=error["error_msg"],
+                error_text=error.get("error_text"),
+                request_params=error.get("request_params"),
+            )
 
         return data
 
