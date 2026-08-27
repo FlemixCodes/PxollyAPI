@@ -1,9 +1,23 @@
 import json
-from typing import Any
+from typing import Any, TypedDict
 
 import httpx
 
 from pxolly_api.exceptions import ApiError, RequestError, ResponseError
+
+
+class ErrorDict(TypedDict):
+    error_code: int
+    error_msg: str
+    error_text: str | None
+    request_params: list[dict[str, str]] | None
+    error_subcode: int | None
+    confirmation_text: str | None
+
+
+class ResponseDict(TypedDict):
+    response: dict[str, Any]
+    error: ErrorDict | None
 
 
 class PxollyRequester:
@@ -21,8 +35,8 @@ class PxollyRequester:
         response = await self.http_client.get(method, params=finally_params)
 
         try:
-            data: dict[str, Any] = response.json()
-            error: dict[str, Any] | None = data.get("error")
+            data: ResponseDict = response.json()
+            error: ErrorDict | None = data.get("error")
         except json.JSONDecodeError as exception:
             raise ResponseError(f"Invalid response: {exception}")
 
